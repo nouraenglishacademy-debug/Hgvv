@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>لوحة تحكم LingoGo</title>
+    <style>
+        /* CSS المدمج */
+        :root { --bg: #0f172a; --card: #1e293b; --primary: #38bdf8; --text: #f8fafc; }
+        body { background: var(--bg); color: var(--text); font-family: 'Cairo', sans-serif; margin: 0; }
+        
+        /* القائمة */
+        nav { display: flex; justify-content: center; padding: 20px; background: #1e293b; gap: 20px; }
+        nav button { background: none; border: none; color: white; cursor: pointer; font-size: 16px; }
+        nav button:hover { color: var(--primary); }
+        
+        /* الحاويات */
+        .view { display: none; padding: 40px; max-width: 800px; margin: auto; }
+        #view-dashboard { display: block; } /* الافتراضي */
+        
+        /* كروت الإحصائيات */
+        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .card { background: var(--card); padding: 20px; border-radius: 10px; text-align: center; border: 1px solid #334155; }
+        
+        .btn-primary { background: var(--primary); border: none; padding: 12px 25px; border-radius: 8px; cursor: pointer; color: #0f172a; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <button onclick="showView('view-dashboard')">📊 اللوحة الرئيسية</button>
+        <button onclick="showView('view-create-bot')">🤖 إنشاء بوت</button>
+    </nav>
+
+    <div id="view-dashboard" class="view">
+        <h1>لوحة التحكم 🚀</h1>
+        <div class="stats-grid">
+            <div class="card"><h3>استهلاكك</h3><p id="usage">450 / 1000</p></div>
+            <div class="card"><h3>حالة الحساب</h3><p id="status">عادي</p></div>
+        </div>
+        <div style="margin-top:20px;">
+            <button class="btn-primary" onclick="alert('جارٍ التحويل للبوت...')">🪙 شراء باقة النجوم</button>
+        </div>
+    </div>
+
+    <div id="view-create-bot" class="view">
+        <h1>إنشاء بوت ترجمة جديد</h1>
+        <input type="text" id="token" placeholder="أدخل التوكن الخاص بك" style="width:100%; padding:10px; margin:10px 0;">
+        <button class="btn-primary" onclick="submitBot()">تفعيل البوت الآن</button>
+    </div>
+
+    <script>
+        // منطق الـ SPA
+        function showView(id) {
+            document.querySelectorAll('.view').forEach(v => v.style.display = 'none');
+            document.getElementById(id).style.display = 'block';
+        }
+
+        function submitBot() {
+            const token = document.getElementById('token').value;
+            if(token.length > 30) {
+                alert("تم إرسال التوكن بنجاح! سيتم ربط البوت في النظام.");
+            } else {
+                alert("يرجى إدخال توكن صحيح.");
+            }
+        }
+    </script>
+</body>
+</html>
